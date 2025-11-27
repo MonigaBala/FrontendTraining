@@ -1,0 +1,147 @@
+window.moviesJsonData = [
+    {
+        "id": 1,
+        "title": "The Last Kingdom",
+        "genre": "Action",
+        "year": 2023,
+        "rating": 8.5,
+        "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=600&fit=crop",
+        "description": "An epic tale of honor and betrayal in medieval times.",
+        "director": "John Smith",
+        "cast": ["Actor One", "Actor Two", "Actor Three"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 2,
+        "title": "City Lights",
+        "genre": "Drama",
+        "year": 2023,
+        "rating": 9.2,
+        "poster": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=600&fit=crop",
+        "description": "A heartwarming story of love and loss in the big city.",
+        "director": "Jane Doe",
+        "cast": ["Actor Four", "Actor Five", "Actor Six"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 3,
+        "title": "Space Odyssey",
+        "genre": "Sci-Fi",
+        "year": 2024,
+        "rating": 8.8,
+        "poster": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=600&fit=crop",
+        "description": "Journey to the stars in this thrilling space adventure.",
+        "director": "Robert Johnson",
+        "cast": ["Actor Seven", "Actor Eight", "Actor Nine"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 4,
+        "title": "Mystery Mansion",
+        "genre": "Thriller",
+        "year": 2023,
+        "rating": 7.9,
+        "poster": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop",
+        "description": "A suspenseful mystery that will keep you guessing.",
+        "director": "Emily Brown",
+        "cast": ["Actor Ten", "Actor Eleven", "Actor Twelve"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 5,
+        "title": "Ocean Depths",
+        "genre": "Adventure",
+        "year": 2024,
+        "rating": 8.3,
+        "poster": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=600&fit=crop",
+        "description": "Dive into an underwater adventure like no other.",
+        "director": "Michael Wilson",
+        "cast": ["Actor Thirteen", "Actor Fourteen", "Actor Fifteen"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 6,
+        "title": "Desert Dreams",
+        "genre": "Drama",
+        "year": 2023,
+        "rating": 8.1,
+        "poster": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&h=600&fit=crop",
+        "description": "A story of hope and survival in the harshest conditions.",
+        "director": "Sarah Davis",
+        "cast": ["Actor Sixteen", "Actor Seventeen", "Actor Eighteen"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 7,
+        "title": "Cyber Revolution",
+        "genre": "Sci-Fi",
+        "year": 2024,
+        "rating": 9.0,
+        "poster": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=600&fit=crop",
+        "description": "The future of technology and humanity collide.",
+        "director": "David Lee",
+        "cast": ["Actor Nineteen", "Actor Twenty", "Actor Twenty-One"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 8,
+        "title": "Forest Secrets",
+        "genre": "Mystery",
+        "year": 2023,
+        "rating": 7.8,
+        "poster": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=600&fit=crop",
+        "description": "Hidden secrets await in the ancient forest.",
+        "director": "Lisa Anderson",
+        "cast": ["Actor Twenty-Two", "Actor Twenty-Three", "Actor Twenty-Four"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 9,
+        "title": "Mountain Peak",
+        "genre": "Adventure",
+        "year": 2024,
+        "rating": 8.6,
+        "poster": "https://images.unsplash.com/photo-1464822759844-d150ad6bfcfe?w=400&h=600&fit=crop",
+        "description": "Conquer the highest peak in this thrilling adventure.",
+        "director": "Chris Martinez",
+        "cast": ["Actor Twenty-Five", "Actor Twenty-Six", "Actor Twenty-Seven"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 10,
+        "title": "Time Traveler",
+        "genre": "Sci-Fi",
+        "year": 2023,
+        "rating": 8.9,
+        "poster": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400&h=600&fit=crop",
+        "description": "Journey through time and change the course of history.",
+        "director": "Amanda Taylor",
+        "cast": ["Actor Twenty-Eight", "Actor Twenty-Nine", "Actor Thirty"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 11,
+        "title": "Neon Nights",
+        "genre": "Action",
+        "year": 2024,
+        "rating": 8.4,
+        "poster": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=600&fit=crop",
+        "description": "High-octane action in the neon-lit city streets.",
+        "director": "James White",
+        "cast": ["Actor Thirty-One", "Actor Thirty-Two", "Actor Thirty-Three"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+        "id": 12,
+        "title": "Ancient Legends",
+        "genre": "Fantasy",
+        "year": 2023,
+        "rating": 8.7,
+        "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=600&fit=crop",
+        "description": "Mythical creatures and ancient powers awaken.",
+        "director": "Rachel Green",
+        "cast": ["Actor Thirty-Four", "Actor Thirty-Five", "Actor Thirty-Six"],
+        "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+];
+

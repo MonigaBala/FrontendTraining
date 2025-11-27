@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Cinema Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-red-600 hover:text-red-500 transition">Cinema Studios</a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="movies.html" class="nav-link">Movies</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <div class="relative group">
+                        <button class="nav-link flex items-center gap-1">
+                            <i class="fas fa-th"></i> Dashboard
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-700">
+                            <div class="py-2">
+                                <a href="watchlist.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-bookmark mr-2"></i> Watchlist</a>
+                                <a href="news.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-newspaper mr-2"></i> News</a>
+                                <a href="careers.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-briefcase mr-2"></i> Careers</a>
+                                <a href="admin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-shield mr-2"></i> Admin Panel</a>
+                                <button id="settingsBtn" class="w-full text-left block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-cog mr-2"></i> Settings</button>
+                                <hr class="my-2 border-gray-700">
+                                <a href="signin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-sign-in-alt mr-2"></i> Sign In</a>
+                                <a href="signup.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-plus mr-2"></i> Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="themeToggle" class="nav-link">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Section -->
+    <section class="login-container pt-32">
+        <div class="login-card animate-fade-in">
+            <div class="text-center mb-8">
+                <div class="text-5xl mb-4 text-red-600"><i class="fas fa-user-plus"></i></div>
+                <h1 class="text-3xl font-bold mb-2">Sign Up</h1>
+                <p class="text-gray-400">Create your Cinema Studios account</p>
+            </div>
+            
+            <form id="signUpForm" class="space-y-6">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <span class="text-red-500 text-sm hidden" id="nameError">Name is required</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                    <span class="text-red-500 text-sm hidden" id="emailError">Invalid email format</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="new-password">
+                    <span class="text-red-500 text-sm hidden" id="passwordError">Password must be at least 6 characters</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <span class="text-red-500 text-sm hidden" id="confirmPasswordError">Passwords do not match</span>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-400">Already have an account? <a href="signin.html" class="text-red-600 hover:text-red-500">Sign In</a></p>
+                <a href="index.html" class="block mt-4 text-gray-400 hover:text-white transition text-sm">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="signup.js"></script>
+</body>
+</html>
+
