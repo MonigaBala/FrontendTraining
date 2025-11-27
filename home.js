@@ -3,6 +3,8 @@ let carouselIndex = 0;
 let carouselInterval;
 let localMoviesCache = [];
 let carouselTotalSlides = 0;
+let currentCardsPerSlide = getCardsPerSlide();
+let resizeListenerInitialized = false;
 
 // Function to get movies data from global scope or fallback cache
 function getMoviesData() {
@@ -13,6 +15,9 @@ function getMoviesData() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    currentCardsPerSlide = getCardsPerSlide();
+    initCarouselResizeListener();
+
     // Function to initialize carousel when movies are ready
     function tryInitCarousel() {
         const data = getMoviesData();
@@ -99,10 +104,12 @@ function initCarousel(dataOverride) {
     carouselContainer.innerHTML = '';
     if (carouselIndicators) carouselIndicators.innerHTML = '';
     
-    // Group movies into slides (4 per slide)
+    const cardsPerSlide = currentCardsPerSlide || getCardsPerSlide();
+
+    // Group movies into slides based on current viewport
     const slides = [];
-    for (let i = 0; i < featuredMovies.length; i += 4) {
-        slides.push(featuredMovies.slice(i, i + 4));
+    for (let i = 0; i < featuredMovies.length; i += cardsPerSlide) {
+        slides.push(featuredMovies.slice(i, i + cardsPerSlide));
     }
     
     if (slides.length === 0) return;
@@ -114,11 +121,13 @@ function initCarousel(dataOverride) {
         slideContainer.className = 'flex w-full flex-shrink-0';
         slideContainer.style.gap = '1rem';
         slideContainer.style.padding = '0 0.5rem';
+        slideContainer.style.flexWrap = cardsPerSlide > 2 ? 'wrap' : 'nowrap';
         
         slide.forEach(movie => {
             const movieCard = createCarouselCard(movie);
-            movieCard.style.flex = '0 0 calc(25% - 0.75rem)';
-            movieCard.style.maxWidth = 'calc(25% - 0.75rem)';
+            const cardWidth = getCardWidth(cardsPerSlide);
+            movieCard.style.flex = `0 0 ${cardWidth}`;
+            movieCard.style.maxWidth = cardWidth;
             movieCard.style.minWidth = '0';
             slideContainer.appendChild(movieCard);
         });
@@ -175,12 +184,58 @@ function createCarouselCard(movie) {
     return card;
 }
 
+function getCardWidth(cardsPerSlide) {
+    switch (cardsPerSlide) {
+        case 1:
+            return '100%';
+        case 2:
+            return 'calc(50% - 0.75rem)';
+        case 3:
+            return 'calc(33.333% - 0.75rem)';
+        default:
+            return 'calc(25% - 0.75rem)';
+    }
+}
+
+function getCardsPerSlide() {
+    if (typeof window === 'undefined') {
+        return 4;
+    }
+    const width = window.innerWidth || document.documentElement.clientWidth || 1920;
+    if (width < 640) return 1;
+    if (width < 768) return 2;
+    if (width < 1280) return 3;
+    return 4;
+}
+
+function debounce(fn, delay = 200) {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn(...args), delay);
+    };
+}
+
+function initCarouselResizeListener() {
+    if (resizeListenerInitialized || typeof window === 'undefined') return;
+    resizeListenerInitialized = true;
+    const handleResize = debounce(() => {
+        const nextValue = getCardsPerSlide();
+        if (nextValue !== currentCardsPerSlide) {
+            currentCardsPerSlide = nextValue;
+            initCarousel();
+        }
+    }, 250);
+    window.addEventListener('resize', handleResize);
+}
+
 function goToSlide(index) {
     const carouselContainer = document.getElementById('carouselContainer');
     if (!carouselContainer) return;
     
     const data = getMoviesData();
-    const totalSlides = carouselTotalSlides || Math.ceil((data.slice(0, 8).length) / 4);
+    const effectiveCardsPerSlide = currentCardsPerSlide || getCardsPerSlide() || 1;
+    const totalSlides = carouselTotalSlides || Math.ceil((data.slice(0, 8).length) / effectiveCardsPerSlide);
     
     if (totalSlides === 0) return;
     
