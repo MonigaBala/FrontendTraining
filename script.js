@@ -356,173 +356,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     updateThemeIcon(currentTheme);
     
-    // Settings modal
-    const settingsBtn = document.getElementById('settingsBtn');
-    const settingsModal = document.getElementById('settingsModal');
-    const closeSettings = document.getElementById('closeSettings');
-    
-    if (settingsBtn && settingsModal) {
-        settingsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            loadUserProfile();
-            settingsModal.classList.remove('hidden');
-            settingsModal.classList.add('flex');
-        });
-    }
-    
-    if (closeSettings && settingsModal) {
-        closeSettings.addEventListener('click', () => {
-            settingsModal.classList.add('hidden');
-            settingsModal.classList.remove('flex');
-        });
-    }
-    
-    // Settings tabs
-    const settingsTabs = document.querySelectorAll('.settings-tab');
-    settingsTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const targetTab = tab.getAttribute('data-tab');
-            settingsTabs.forEach(t => {
-                t.classList.remove('active', 'border-red-600', 'border-b-2');
-                t.classList.add('text-gray-400');
-            });
-            tab.classList.add('active', 'border-red-600', 'border-b-2');
-            tab.classList.remove('text-gray-400');
-            
-            document.querySelectorAll('.settings-tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            document.getElementById(targetTab + 'Tab').classList.remove('hidden');
-        });
-    });
-    
-    // Load user profile
-    function loadUserProfile() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        const profileInfo = document.getElementById('userProfileInfo');
-        const profileForm = document.getElementById('profileForm');
-        
-        if (currentUser) {
-            profileInfo.classList.add('hidden');
-            profileForm.classList.remove('hidden');
-            document.getElementById('profileName').value = currentUser.name || '';
-            document.getElementById('profileEmail').value = currentUser.email || '';
-            document.getElementById('profilePhone').value = currentUser.phone || '';
-            document.getElementById('profileAddress').value = currentUser.address || '';
-        } else {
-            profileInfo.classList.remove('hidden');
-            profileForm.classList.add('hidden');
-        }
-    }
-    
-    // Profile form submission
-    const profileForm = document.getElementById('profileForm');
-    if (profileForm) {
-        profileForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            if (!currentUser) {
-                showToast('Please sign in first', 'error');
-                return;
-            }
-            
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.email === currentUser.email);
-            
-            if (userIndex !== -1) {
-                users[userIndex].name = document.getElementById('profileName').value;
-                users[userIndex].phone = document.getElementById('profilePhone').value;
-                users[userIndex].address = document.getElementById('profileAddress').value;
-                
-                currentUser.name = users[userIndex].name;
-                currentUser.phone = users[userIndex].phone;
-                currentUser.address = users[userIndex].address;
-                
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                showToast('Profile updated successfully!');
-            }
-        });
-    }
-    
-    // Password form submission
-    const passwordForm = document.getElementById('passwordForm');
-    if (passwordForm) {
-        passwordForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            if (!currentUser) {
-                showToast('Please sign in first', 'error');
-                return;
-            }
-            
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            if (currentPassword !== currentUser.password) {
-                showToast('Current password is incorrect', 'error');
-                return;
-            }
-            
-            if (newPassword.length < 6) {
-                showToast('New password must be at least 6 characters', 'error');
-                return;
-            }
-            
-            if (newPassword !== confirmPassword) {
-                showToast('New passwords do not match', 'error');
-                return;
-            }
-            
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.email === currentUser.email);
-            
-            if (userIndex !== -1) {
-                users[userIndex].password = newPassword;
-                currentUser.password = newPassword;
-                
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                showToast('Password updated successfully!');
-                passwordForm.reset();
-            }
-        });
-    }
-    
-    // Load saved settings
-    const savedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
-    if (savedSettings.notifications !== undefined) {
-        const notificationsCheck = document.getElementById('notifications');
-        if (notificationsCheck) notificationsCheck.checked = savedSettings.notifications;
-    }
-    if (savedSettings.autoplay !== undefined) {
-        const autoplayCheck = document.getElementById('autoplay');
-        if (autoplayCheck) autoplayCheck.checked = savedSettings.autoplay;
-    }
-    if (savedSettings.language) {
-        const languageSelect = document.getElementById('language');
-        if (languageSelect) languageSelect.value = savedSettings.language;
-    }
-    
-    // Save settings on change
-    ['notifications', 'autoplay', 'language'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.addEventListener('change', () => {
-                const settings = {
-                    notifications: document.getElementById('notifications')?.checked || false,
-                    autoplay: document.getElementById('autoplay')?.checked || false,
-                    language: document.getElementById('language')?.value || 'English'
-                };
-                localStorage.setItem('settings', JSON.stringify(settings));
-            });
-        }
-    });
-
     injectUserActivityModal();
     setupUserMenu();
     updateAuthUI();
@@ -706,34 +539,31 @@ function injectUserActivityModal() {
 
 function setupUserMenu() {
     if (document.getElementById('userMenuWrapper')) return;
-    const themeToggle = document.getElementById('themeToggle');
-    if (!themeToggle || !themeToggle.parentElement) return;
+    const navUtility = document.getElementById('navUtility');
+    if (!navUtility) return;
     
     const wrapper = document.createElement('div');
     wrapper.id = 'userMenuWrapper';
-    wrapper.className = 'relative hidden md:block';
+    wrapper.className = 'relative hidden md:flex items-center';
     wrapper.innerHTML = `
-        <button id="userMenuButton" type="button" class="nav-link hidden items-center gap-2 px-4 py-2 bg-gray-800 rounded-full border border-gray-700 hover:border-red-500 transition">
+        <button id="userMenuButton" type="button" class="hidden items-center gap-2 bg-gray-900/70 border border-gray-700 px-3 py-1.5 rounded-full text-sm font-semibold hover:border-red-500 transition">
             <span id="userMenuAvatar" class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-sm font-bold"></span>
             <span id="userMenuName" class="text-sm font-semibold"></span>
-            <span id="userNotificationDot" class="ml-2 hidden rounded-full bg-red-600 text-xs px-2 py-0.5 text-white font-semibold"></span>
+            <span id="userNotificationDot" class="ml-1 hidden rounded-full bg-red-600 text-xs px-2 py-0.5 text-white font-semibold"></span>
+            <i class="fas fa-chevron-down text-xs opacity-70"></i>
         </button>
         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-60 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl hidden">
-            <button data-user-action="profile" class="block w-full text-left px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-id-badge mr-2 text-red-500"></i> View Profile</button>
             <a href="watchlist.html" class="block px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-bookmark mr-2 text-red-500"></i> My Watchlist</a>
             <button data-user-action="activity" class="block w-full text-left px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-clipboard-list mr-2 text-red-500"></i> Applications & Messages</button>
             <button data-user-action="signout" class="block w-full text-left px-4 py-3 hover:bg-gray-800 transition text-red-400"><i class="fas fa-sign-out-alt mr-2"></i> Sign Out</button>
         </div>
     `;
-    themeToggle.parentElement.appendChild(wrapper);
+    navUtility.appendChild(wrapper);
     
     const dropdown = wrapper.querySelector('#userMenuDropdown');
-    wrapper.querySelector('#userMenuButton').addEventListener('click', () => {
+    const toggleButton = wrapper.querySelector('#userMenuButton');
+    toggleButton.addEventListener('click', () => {
         dropdown.classList.toggle('hidden');
-    });
-    dropdown.querySelector('[data-user-action="profile"]').addEventListener('click', () => {
-        dropdown.classList.add('hidden');
-        document.getElementById('settingsBtn')?.click();
     });
     dropdown.querySelector('[data-user-action="activity"]').addEventListener('click', () => {
         dropdown.classList.add('hidden');

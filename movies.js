@@ -1,6 +1,10 @@
 // Movies page functionality
 let currentPage = 1;
-const moviesPerPage = 5;
+const MIN_MOVIES_PER_PAGE = 1;
+const MAX_MOVIES_PER_PAGE = 50;
+const DEFAULT_MOVIES_PER_PAGE = 5;
+let moviesPerPage = clampMoviesPerPage(parseInt(localStorage.getItem('moviesPerPage'), 10));
+localStorage.setItem('moviesPerPage', String(moviesPerPage));
 let filteredMovies = [];
 let currentView = localStorage.getItem('movieView') || 'card'; // 'card' or 'list'
 
@@ -24,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             renderMovies();
             setupFilters();
             setupViewToggle();
+            setupPaginationControls();
         } else {
             console.warn('No movies data received');
         }
@@ -36,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderMovies();
         setupFilters();
         setupViewToggle();
+        setupPaginationControls();
     } else {
         // Try loading again after a short delay
         setTimeout(() => {
@@ -45,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderMovies();
                 setupFilters();
                 setupViewToggle();
+                setupPaginationControls();
             }
         }, 500);
     }
@@ -261,7 +268,7 @@ function renderPagination() {
     const pagination = document.getElementById('pagination');
     if (!pagination) return;
     
-    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+    const totalPages = Math.ceil(filteredMovies.length / Math.max(moviesPerPage, 1));
     
     if (totalPages <= 1) {
         pagination.innerHTML = '';
@@ -319,7 +326,7 @@ function renderPagination() {
 }
 
 function goToPage(page) {
-    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+    const totalPages = Math.ceil(filteredMovies.length / Math.max(moviesPerPage, 1));
     if (page < 1 || page > totalPages) return;
     
     currentPage = page;
@@ -327,5 +334,76 @@ function goToPage(page) {
     
     // Scroll to top of movies section
     window.scrollTo({ top: 400, behavior: 'smooth' });
+}
+
+function setupPaginationControls() {
+    const perPageSelect = document.getElementById('perPageSelect');
+    const perPageCustom = document.getElementById('perPageCustom');
+    const applyBtn = document.getElementById('perPageApply');
+    
+    if (perPageSelect) {
+        const option = Array.from(perPageSelect.options).find(opt => parseInt(opt.value, 10) === moviesPerPage);
+        perPageSelect.value = option ? String(moviesPerPage) : '';
+        if (!perPageSelect.dataset.bound) {
+            perPageSelect.addEventListener('change', (event) => {
+                const value = parseInt(event.target.value, 10);
+                if (!Number.isNaN(value)) {
+                    updateMoviesPerPage(value);
+                    if (perPageCustom) perPageCustom.value = '';
+                }
+            });
+            perPageSelect.dataset.bound = 'true';
+        }
+    }
+    
+    if (applyBtn && perPageCustom && !applyBtn.dataset.bound) {
+        const handler = () => {
+            const customValue = parseInt(perPageCustom.value, 10);
+            if (Number.isNaN(customValue)) {
+                notifyPaginationError('Enter a number to update page size.');
+                return;
+            }
+            if (customValue < MIN_MOVIES_PER_PAGE || customValue > MAX_MOVIES_PER_PAGE) {
+                notifyPaginationError(`Choose between ${MIN_MOVIES_PER_PAGE} and ${MAX_MOVIES_PER_PAGE} movies per page.`);
+                return;
+            }
+            updateMoviesPerPage(customValue);
+            if (perPageSelect) {
+                const option = Array.from(perPageSelect.options).find(opt => parseInt(opt.value, 10) === customValue);
+                perPageSelect.value = option ? String(customValue) : '';
+            }
+        };
+        applyBtn.addEventListener('click', handler);
+        perPageCustom.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handler();
+            }
+        });
+        applyBtn.dataset.bound = 'true';
+    }
+}
+
+function updateMoviesPerPage(value) {
+    const nextValue = clampMoviesPerPage(value);
+    moviesPerPage = nextValue;
+    localStorage.setItem('moviesPerPage', String(nextValue));
+    currentPage = 1;
+    renderMovies();
+}
+
+function clampMoviesPerPage(value) {
+    if (Number.isNaN(value) || value < MIN_MOVIES_PER_PAGE) {
+        return DEFAULT_MOVIES_PER_PAGE;
+    }
+    return Math.min(MAX_MOVIES_PER_PAGE, value);
+}
+
+function notifyPaginationError(message) {
+    if (typeof showToast === 'function') {
+        showToast(message, 'error');
+    } else {
+        console.error(message);
+    }
 }
 

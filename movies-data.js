@@ -8,7 +8,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=600&fit=crop",
         "description": "An epic tale of honor and betrayal in medieval times.",
         "director": "John Smith",
-        "cast": ["Actor One", "Actor Two", "Actor Three"],
+        "cast": [
+            "Lena Idris",
+            "Marco Chen",
+            "Priya Nair"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -20,7 +24,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=600&fit=crop",
         "description": "A heartwarming story of love and loss in the big city.",
         "director": "Jane Doe",
-        "cast": ["Actor Four", "Actor Five", "Actor Six"],
+        "cast": [
+            "Caleb Frost",
+            "Nina Alvarez",
+            "Hugo Stanton"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -32,7 +40,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=600&fit=crop",
         "description": "Journey to the stars in this thrilling space adventure.",
         "director": "Robert Johnson",
-        "cast": ["Actor Seven", "Actor Eight", "Actor Nine"],
+        "cast": [
+            "Sora Bennett",
+            "Elijah Cruz",
+            "Maya Laurent"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -44,7 +56,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop",
         "description": "A suspenseful mystery that will keep you guessing.",
         "director": "Emily Brown",
-        "cast": ["Actor Ten", "Actor Eleven", "Actor Twelve"],
+        "cast": [
+            "Gideon Pike",
+            "Tessa Monroe",
+            "Damian Cole"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -56,7 +72,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=600&fit=crop",
         "description": "Dive into an underwater adventure like no other.",
         "director": "Michael Wilson",
-        "cast": ["Actor Thirteen", "Actor Fourteen", "Actor Fifteen"],
+        "cast": [
+            "Ivy Park",
+            "Rowan Steele",
+            "Kara Bloom"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -68,7 +88,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&h=600&fit=crop",
         "description": "A story of hope and survival in the harshest conditions.",
         "director": "Sarah Davis",
-        "cast": ["Actor Sixteen", "Actor Seventeen", "Actor Eighteen"],
+        "cast": [
+            "Mateo Vargas",
+            "Alina Brooks",
+            "Darius Holt"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -80,7 +104,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=600&fit=crop",
         "description": "The future of technology and humanity collide.",
         "director": "David Lee",
-        "cast": ["Actor Nineteen", "Actor Twenty", "Actor Twenty-One"],
+        "cast": [
+            "Evelyn Carter",
+            "Noah Whitaker",
+            "Selene Hart"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -92,7 +120,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=600&fit=crop",
         "description": "Hidden secrets await in the ancient forest.",
         "director": "Lisa Anderson",
-        "cast": ["Actor Twenty-Two", "Actor Twenty-Three", "Actor Twenty-Four"],
+        "cast": [
+            "Omar Faris",
+            "Luca Romano",
+            "Harper Quinn"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -104,7 +136,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1464822759844-d150ad6bfcfe?w=400&h=600&fit=crop",
         "description": "Conquer the highest peak in this thrilling adventure.",
         "director": "Chris Martinez",
-        "cast": ["Actor Twenty-Five", "Actor Twenty-Six", "Actor Twenty-Seven"],
+        "cast": [
+            "Jonah Briggs",
+            "Mara Ellison",
+            "Felix Grant"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -116,7 +152,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=400&h=600&fit=crop",
         "description": "Journey through time and change the course of history.",
         "director": "Amanda Taylor",
-        "cast": ["Actor Twenty-Eight", "Actor Twenty-Nine", "Actor Thirty"],
+        "cast": [
+            "Asha Patel",
+            "Reese Donovan",
+            "Quinn Sato"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -128,7 +168,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=600&fit=crop",
         "description": "High-octane action in the neon-lit city streets.",
         "director": "James White",
-        "cast": ["Actor Thirty-One", "Actor Thirty-Two", "Actor Thirty-Three"],
+        "cast": [
+            "Isabel Winters",
+            "Theo Knight",
+            "Celine Ward"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     },
     {
@@ -140,8 +184,11 @@ window.moviesJsonData = [
         "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=600&fit=crop",
         "description": "Mythical creatures and ancient powers awaken.",
         "director": "Rachel Green",
-        "cast": ["Actor Thirty-Four", "Actor Thirty-Five", "Actor Thirty-Six"],
+        "cast": [
+            "Miles Porter",
+            "Lana Becker",
+            "Julian Cross"
+        ],
         "trailer": "https://www.youtube.com/embed/dQw4w9WgXcQ"
     }
 ];
-

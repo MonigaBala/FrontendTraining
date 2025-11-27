@@ -91,9 +91,7 @@ function updateWatchlistCount() {
 
 function setupQuickActions() {
     const addMovieBtn = document.getElementById('addMovieAction');
-    const editContentBtn = document.getElementById('editContentAction');
     const analyticsBtn = document.getElementById('viewAnalyticsAction');
-    const quickSettingsBtn = document.getElementById('quickSettingsAction');
     const reviewRequestsBtn = document.getElementById('reviewRequestsAction');
     const closeModalBtn = document.getElementById('closeQuickAction');
     const modal = document.getElementById('quickActionModal');
@@ -106,12 +104,6 @@ function setupQuickActions() {
         });
     }
 
-    if (editContentBtn) {
-        editContentBtn.addEventListener('click', () => {
-            openQuickActionModal('Edit Spotlight Content', createEditContentForm());
-        });
-    }
-
     if (analyticsBtn) {
         analyticsBtn.addEventListener('click', () => {
             openQuickActionModal('Performance Analytics', createAnalyticsPanel());
@@ -121,13 +113,6 @@ function setupQuickActions() {
     if (reviewRequestsBtn) {
         reviewRequestsBtn.addEventListener('click', () => {
             openQuickActionModal('Review Requests', createRequestsPanel());
-        });
-    }
-
-    if (quickSettingsBtn) {
-        quickSettingsBtn.addEventListener('click', () => {
-            closeQuickActionModal();
-            document.getElementById('settingsBtn')?.click();
         });
     }
 
@@ -229,54 +214,6 @@ function createAddMovieForm() {
         showToast(`"${title}" saved for publishing!`);
         closeQuickActionModal();
         updateWatchlistCount();
-    });
-
-    return form;
-}
-
-function createEditContentForm() {
-    const settings = JSON.parse(localStorage.getItem('adminContentSettings') || '{}');
-    const form = document.createElement('form');
-    form.className = 'space-y-4';
-    form.innerHTML = `
-        <div class="form-group">
-            <label class="block text-sm text-gray-300 mb-1">Spotlight Heading *</label>
-            <input type="text" name="headline" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Featured premiere..." required>
-        </div>
-        <div class="form-group">
-            <label class="block text-sm text-gray-300 mb-1">Callout Text *</label>
-            <textarea name="message" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="Share news or production updates" required></textarea>
-        </div>
-        <div class="form-group">
-            <label class="block text-sm text-gray-300 mb-1">Primary CTA Link</label>
-            <input type="url" name="ctaLink" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500" placeholder="https://www.cinema.com/featured">
-        </div>
-        <button type="submit" class="btn-primary w-full">Save Content</button>
-    `;
-
-    const headlineInput = form.querySelector('input[name="headline"]');
-    const messageInput = form.querySelector('textarea[name="message"]');
-    const ctaInput = form.querySelector('input[name="ctaLink"]');
-    if (headlineInput) headlineInput.value = settings.headline || '';
-    if (messageInput) messageInput.value = settings.message || '';
-    if (ctaInput) ctaInput.value = settings.ctaLink || '';
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const headline = formData.get('headline').trim();
-        const message = formData.get('message').trim();
-        const ctaLink = formData.get('ctaLink').trim();
-
-        if (!headline || !message) {
-            showToast('Headline and callout text are required', 'error');
-            return;
-        }
-
-        const contentSettings = { headline, message, ctaLink };
-        localStorage.setItem('adminContentSettings', JSON.stringify(contentSettings));
-        showToast('Content saved! This will reflect for signed-in users.');
-        closeQuickActionModal();
     });
 
     return form;

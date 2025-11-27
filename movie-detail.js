@@ -58,6 +58,11 @@ function loadMovieDetail(movieId) {
     const trailerUrl = movie.trailer || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     
     container.innerHTML = `
+        <div class="flex justify-end mb-6">
+            <a href="movies.html" class="inline-flex items-center gap-2 px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded-full border border-gray-700 transition text-sm font-semibold">
+                <i class="fas fa-arrow-left"></i> Back to Movies
+            </a>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div class="animate-fade-in relative">
                 <img src="${movie.poster}" alt="${movie.title}" class="w-full rounded-lg shadow-2xl">
@@ -79,9 +84,6 @@ function loadMovieDetail(movieId) {
                             class="px-6 py-3 ${inWatchlist ? 'bg-red-600' : 'bg-gray-700'} hover:bg-gray-600 rounded-lg transition font-semibold">
                         <i class="fas fa-bookmark"></i> ${inWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
                     </button>
-                    <a href="movies.html" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition font-semibold inline-block">
-                        <i class="fas fa-arrow-left"></i> Back to Movies
-                    </a>
                     <a href="${trailerUrl}" target="_blank" rel="noopener" class="px-6 py-3 border border-white/20 hover:bg-white/10 rounded-lg transition font-semibold inline-flex items-center gap-2">
                         <i class="fas fa-play"></i> Watch Trailer
                     </a>
@@ -105,7 +107,7 @@ function loadMovieDetail(movieId) {
                         <div class="p-6 text-center">
                             <div class="text-5xl mb-4 text-red-600"><i class="fas fa-user"></i></div>
                             <h3 class="text-xl font-bold mb-2">${actor}</h3>
-                            <p class="text-gray-400">Actor</p>
+                            <p class="text-gray-400">Cast</p>
                         </div>
                     </div>
                 `).join('')}
