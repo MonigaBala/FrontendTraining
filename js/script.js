@@ -237,7 +237,7 @@ async function loadFallbackMovies() {
             return;
         }
         const script = existingScript || document.createElement('script');
-        script.src = 'movies-data.js';
+        script.src = '../js/movies-data.js';
         script.async = true;
         script.dataset.moviesFallback = 'true';
         script.onload = () => resolve(window.moviesJsonData || []);
@@ -251,7 +251,7 @@ async function loadFallbackMovies() {
 
 async function loadMovies() {
     try {
-        const response = await fetch('movies.json', { cache: 'no-store' });
+        const response = await fetch('../data/movies.json', { cache: 'no-store' });
         if (!response.ok) {
             throw new Error('Failed to load movies.json');
         }
@@ -373,11 +373,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Set active nav link based on current page
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPage = window.location.pathname.split('/').pop() || '/index.html';
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        if (href === currentPage || (currentPage === '' && href === '/index.html')) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -553,7 +553,7 @@ function setupUserMenu() {
             <i class="fas fa-chevron-down text-xs opacity-70"></i>
         </button>
         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-60 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl hidden">
-            <a href="watchlist.html" class="block px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-bookmark mr-2 text-red-500"></i> My Watchlist</a>
+            <a href="../pages/watchlist.html" class="block px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-bookmark mr-2 text-red-500"></i> My Watchlist</a>
             <button data-user-action="activity" class="block w-full text-left px-4 py-3 hover:bg-gray-800 transition"><i class="fas fa-clipboard-list mr-2 text-red-500"></i> Applications & Messages</button>
             <button data-user-action="signout" class="block w-full text-left px-4 py-3 hover:bg-gray-800 transition text-red-400"><i class="fas fa-sign-out-alt mr-2"></i> Sign Out</button>
         </div>
@@ -616,8 +616,8 @@ function updateAuthUI() {
     
     const nav = document.querySelector('nav');
     if (nav) {
-        const signInLinks = nav.querySelectorAll('a[href="signin.html"]');
-        const signUpLinks = nav.querySelectorAll('a[href="signup.html"]');
+        const signInLinks = nav.querySelectorAll('a[href="../pages/signin.html"]');
+        const signUpLinks = nav.querySelectorAll('a[href="../pages/signup.html"]');
         signInLinks.forEach(link => user ? link.classList.add('hidden') : link.classList.remove('hidden'));
         signUpLinks.forEach(link => user ? link.classList.add('hidden') : link.classList.remove('hidden'));
     }

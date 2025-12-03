@@ -6,19 +6,33 @@
     <title>Sign Up - Cinema Studios</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="bg-gray-900 text-white">
         <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-800" data-theme-nav>
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-red-600 hover:text-red-500 transition">Cinema Studios</a>
+<a href="/index.html" class="flex items-center gap-2 group">
+    <span class="text-3xl font-extrabold tracking-widest 
+        bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent 
+        drop-shadow-[0_0_6px_rgba(255,0,0,0.4)]
+        group-hover:from-red-500 group-hover:to-red-300 transition-all duration-300">
+        Cinema
+    </span>
+
+    <span class="px-2 py-0.5 text-sm font-semibold tracking-wide 
+        border border-red-600 rounded-lg 
+        bg-gray-900/60 backdrop-blur-sm
+        group-hover:bg-red-600 group-hover:text-black transition-all duration-300">
+        Studios
+    </span>
+</a>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="movies.html" class="nav-link">Movies</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="/index.html" class="nav-link">Home</a>
+                    <a href="../pages/movies.html" class="nav-link">Movies</a>
+                    <a href="../pages/about.html" class="nav-link">About</a>
+                    <a href="../pages/contact.html" class="nav-link">Contact</a>
                     <div class="relative group">
                         <button class="nav-link flex items-center gap-1">
                             <i class="fas fa-film"></i> Studio Suite
@@ -26,12 +40,12 @@
                         </button>
                         <div class="absolute right-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-700">
                             <div class="py-2">
-                                <a href="watchlist.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-bookmark mr-2"></i> Watchlist</a>
-                                <a href="news.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-newspaper mr-2"></i> News</a>
-                                <a href="careers.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-briefcase mr-2"></i> Careers</a>
-                                <a href="admin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-shield mr-2"></i> Studio Suite</a>
+                                <a href="../pages/watchlist.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-bookmark mr-2"></i> Watchlist</a>
+                                <a href="../pages/news.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-newspaper mr-2"></i> News</a>
+                                <a href="../pages/careers.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-briefcase mr-2"></i> Careers</a>
+                                <a href="../pages/admin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-shield mr-2"></i> Studio Suite</a>
                                 <hr class="my-2 border-gray-700">
-                                <a href="signin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-sign-in-alt mr-2"></i> Sign In</a>
+                                <a href="../pages/signin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-sign-in-alt mr-2"></i> Sign In</a>
                             </div>
                         </div>
                     </div>
@@ -47,15 +61,15 @@
             </div>
             <div class="hidden md:hidden mt-4" id="mobileMenu">
                 <div class="flex flex-col space-y-3">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="movies.html" class="nav-link">Movies</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <a href="watchlist.html" class="nav-link"><i class="fas fa-bookmark"></i> Watchlist</a>
-                    <a href="news.html" class="nav-link">News</a>
-                    <a href="careers.html" class="nav-link">Careers</a>
-                    <a href="admin.html" class="nav-link"><i class="fas fa-user-shield"></i> Studio Suite</a>
-                    <a href="signin.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                    <a href="/index.html" class="nav-link">Home</a>
+                    <a href="../pages/movies.html" class="nav-link">Movies</a>
+                    <a href="../pages/about.html" class="nav-link">About</a>
+                    <a href="../pages/contact.html" class="nav-link">Contact</a>
+                    <a href="../pages/watchlist.html" class="nav-link"><i class="fas fa-bookmark"></i> Watchlist</a>
+                    <a href="../pages/news.html" class="nav-link">News</a>
+                    <a href="../pages/careers.html" class="nav-link">Careers</a>
+                    <a href="../pages/admin.html" class="nav-link"><i class="fas fa-user-shield"></i> Studio Suite</a>
+                    <a href="../pages/signin.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign In</a>
                     <button id="themeToggleMobile" class="nav-link text-left"><i class="fas fa-moon"></i> Toggle Theme</button>
                 </div>
             </div>
@@ -104,16 +118,16 @@
             </form>
             
             <div class="mt-6 text-center">
-                <p class="text-gray-400">Already have an account? <a href="signin.html" class="text-red-600 hover:text-red-500">Sign In</a></p>
-                <a href="index.html" class="block mt-4 text-gray-400 hover:text-white transition text-sm">
+                <p class="text-gray-400">Already have an account? <a href="../pages/signin.html" class="text-red-600 hover:text-red-500">Sign In</a></p>
+                <a href="/index.html" class="block mt-4 text-gray-400 hover:text-white transition text-sm">
                     <i class="fas fa-arrow-left"></i> Back to Home
                 </a>
             </div>
         </div>
     </section>
 
-    <script src="script.js"></script>
-    <script src="signup.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/signup.js"></script>
 </body>
 </html>
 

@@ -25,7 +25,6 @@ A modern, responsive multi-page website for a movie production house built with 
 - ✅ Interactive Google Maps on contact page
 - ✅ Smooth animations and hover effects
 - ✅ Mobile-friendly navigation menu
-- ✅ Toast notifications for user feedback
 
 ## Setup Instructions
 

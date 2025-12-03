@@ -1,5 +1,6 @@
 // Home page specific functionality
 let carouselIndex = 0;
+let currentCardIndex = 0;
 let carouselInterval;
 let localMoviesCache = [];
 let carouselTotalSlides = 0;
@@ -170,7 +171,7 @@ function createCarouselCard(movie) {
             <img src="${movie.poster}" alt="${movie.title}" loading="lazy" class="w-full h-80 object-cover rounded-t-lg" onerror="this.src='https://via.placeholder.com/400x600/1f2937/9ca3af?text=No+Image'">
         </a>
         <div class="movie-card-content p-4">
-            <a href="movie-detail.html?id=${movie.id}">
+            <a href="../pages/movie-detail.html?id=${movie.id}">
                 <h3 class="text-lg font-bold mb-2 hover:text-red-600 transition line-clamp-2">${movie.title}</h3>
             </a>
             <div class="flex items-center justify-between mb-2">
@@ -178,7 +179,7 @@ function createCarouselCard(movie) {
                 <span class="text-gray-400 text-sm">${movie.year}</span>
             </div>
             <p class="text-gray-400 text-xs mb-3">${movie.genre}</p>
-            <a href="movie-detail.html?id=${movie.id}" class="btn-view w-full text-center block text-sm py-2">View Details</a>
+            <a href="../pages/movie-detail.html?id=${movie.id}" class="btn-view w-full text-center block text-sm py-2">View Details</a>
         </div>
     `;
     return card;
@@ -199,7 +200,7 @@ function getCardWidth(cardsPerSlide) {
 
 function getCardsPerSlide() {
     if (typeof window === 'undefined') {
-        return 4;
+        return 1;
     }
     const width = window.innerWidth || document.documentElement.clientWidth || 1920;
     if (width < 640) return 1;
@@ -253,14 +254,36 @@ function goToSlide(index) {
 }
 
 function nextSlide() {
-    if (!carouselTotalSlides || carouselTotalSlides <= 1) return;
-    goToSlide(carouselIndex + 1);
+    const carouselContainer = document.getElementById('carouselContainer');
+    if (!carouselContainer) return;
+
+    const totalCards = carouselContainer.querySelectorAll('.movie-card').length;
+    const cardWidth = carouselContainer.querySelector('.movie-card').offsetWidth + 16; // includes gap
+
+    currentCardIndex++;
+    if (currentCardIndex >= totalCards) {
+        currentCardIndex = 0; // loop
+    }
+
+    carouselContainer.style.transform = `translateX(-${currentCardIndex * cardWidth}px)`;
 }
 
+
 function prevSlide() {
-    if (!carouselTotalSlides || carouselTotalSlides <= 1) return;
-    goToSlide(carouselIndex - 1);
+    const carouselContainer = document.getElementById('carouselContainer');
+    if (!carouselContainer) return;
+
+    const totalCards = carouselContainer.querySelectorAll('.movie-card').length;
+    const cardWidth = carouselContainer.querySelector('.movie-card').offsetWidth + 16;
+
+    currentCardIndex--;
+    if (currentCardIndex < 0) {
+        currentCardIndex = totalCards - 1;
+    }
+
+    carouselContainer.style.transform = `translateX(-${currentCardIndex * cardWidth}px)`;
 }
+
 
 function startCarousel() {
     stopCarousel();
@@ -280,11 +303,11 @@ function createMovieCard(movie, isFeatured = false) {
     const card = document.createElement('div');
     card.className = 'movie-card';
     card.innerHTML = `
-        <a href="movie-detail.html?id=${movie.id}" class="block">
+        <a href="../pages/movie-detail.html?id=${movie.id}" class="block">
             <img src="${movie.poster}" alt="${movie.title}" loading="lazy">
         </a>
         <div class="movie-card-content">
-            <a href="movie-detail.html?id=${movie.id}">
+            <a href="../pages/movie-detail.html?id=${movie.id}">
                 <h3 class="text-xl font-bold mb-2 hover:text-red-600 transition">${movie.title}</h3>
             </a>
             <div class="flex items-center justify-between mb-2">
@@ -293,7 +316,7 @@ function createMovieCard(movie, isFeatured = false) {
             </div>
             <p class="text-gray-400 text-sm mb-3">${movie.genre}</p>
             <div class="flex gap-2">
-                <a href="movie-detail.html?id=${movie.id}" class="btn-view flex-1 text-center">View Details</a>
+                <a href="../pages/movie-detail.html?id=${movie.id}" class="btn-view flex-1 text-center">View Details</a>
                 <button onclick="event.stopPropagation(); addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster}')" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded transition">
                     <i class="fas fa-bookmark"></i>
                 </button>
@@ -312,7 +335,7 @@ function createNewsCard(news) {
             <span class="text-gray-400 text-sm">${new Date(news.date).toLocaleDateString()}</span>
             <h3 class="text-xl font-bold mt-2 mb-2">${news.title}</h3>
             <p class="text-gray-400 mb-4">${news.excerpt}</p>
-            <a href="news.html" class="text-red-600 hover:text-red-500 transition">Read More <i class="fas fa-arrow-right"></i></a>
+            <a href="../pages/news.html" class="text-red-600 hover:text-red-500 transition">Read More <i class="fas fa-arrow-right"></i></a>
         </div>
     `;
     return card;

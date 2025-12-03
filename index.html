@@ -6,19 +6,33 @@
     <title>Cinema Studios - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="bg-gray-900 text-white">
         <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-800" data-theme-nav>
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-red-600 hover:text-red-500 transition">Cinema Studios</a>
+<a href="index.html" class="flex items-center gap-2 group">
+    <span class="text-3xl font-extrabold tracking-widest 
+        bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent 
+        drop-shadow-[0_0_6px_rgba(255,0,0,0.4)]
+        group-hover:from-red-500 group-hover:to-red-300 transition-all duration-300">
+        Cinema
+    </span>
+
+    <span class="px-2 py-0.5 text-sm font-semibold tracking-wide 
+        border border-red-600 rounded-lg 
+        bg-gray-900/60 backdrop-blur-sm
+        group-hover:bg-red-600 group-hover:text-black transition-all duration-300">
+        Studios
+    </span>
+</a>
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="index.html" class="nav-link">Home</a>
-                    <a href="movies.html" class="nav-link">Movies</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="../pages/movies.html" class="nav-link">Movies</a>
+                    <a href="../pages/about.html" class="nav-link">About</a>
+                    <a href="../pages/contact.html" class="nav-link">Contact</a>
                     <div class="relative group">
                         <button class="nav-link flex items-center gap-1">
                             <i class="fas fa-film"></i> Studio Suite
@@ -26,12 +40,12 @@
                         </button>
                         <div class="absolute right-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-700">
                             <div class="py-2">
-                                <a href="watchlist.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-bookmark mr-2"></i> Watchlist</a>
-                                <a href="news.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-newspaper mr-2"></i> News</a>
-                                <a href="careers.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-briefcase mr-2"></i> Careers</a>
-                                <a href="admin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-shield mr-2"></i> Studio Suite</a>
+                                <a href="./pages/watchlist.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-bookmark mr-2"></i> Watchlist</a>
+                                <a href="./pages/news.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-newspaper mr-2"></i> News</a>
+                                <a href="./pages/careers.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-briefcase mr-2"></i> Careers</a>
+                                <a href="./pages/admin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-user-shield mr-2"></i> Studio Suite</a>
                                 <hr class="my-2 border-gray-700">
-                                <a href="signin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-sign-in-alt mr-2"></i> Sign In</a>
+                                <a href="./pages/signin.html" class="block px-4 py-2 hover:bg-gray-700 transition"><i class="fas fa-sign-in-alt mr-2"></i> Sign In</a>
                             </div>
                         </div>
                     </div>
@@ -48,14 +62,14 @@
             <div class="hidden md:hidden mt-4" id="mobileMenu">
                 <div class="flex flex-col space-y-3">
                     <a href="index.html" class="nav-link">Home</a>
-                    <a href="movies.html" class="nav-link">Movies</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <a href="watchlist.html" class="nav-link"><i class="fas fa-bookmark"></i> Watchlist</a>
-                    <a href="news.html" class="nav-link">News</a>
-                    <a href="careers.html" class="nav-link">Careers</a>
-                    <a href="admin.html" class="nav-link"><i class="fas fa-user-shield"></i> Studio Suite</a>
-                    <a href="signin.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                    <a href="../pages/movies.html" class="nav-link">Movies</a>
+                    <a href="../pages/about.html" class="nav-link">About</a>
+                    <a href="../pages/contact.html" class="nav-link">Contact</a>
+                    <a href="../pages/watchlist.html" class="nav-link"><i class="fas fa-bookmark"></i> Watchlist</a>
+                    <a href="../pages/news.html" class="nav-link">News</a>
+                    <a href="../pages/careers.html" class="nav-link">Careers</a>
+                    <a href="../pages/admin.html" class="nav-link"><i class="fas fa-user-shield"></i> Studio Suite</a>
+                    <a href="../pages/signin.html" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign In</a>
                     <button id="themeToggleMobile" class="nav-link text-left"><i class="fas fa-moon"></i> Toggle Theme</button>
                 </div>
             </div>
@@ -70,11 +84,20 @@
         </video>
         <div class="hero-video-overlay"></div>
         <div class="hero-video-content animate-fade-in">
-            <h1 class="hero-title mb-4 animate-slide-up">Welcome to Cinema Studios</h1>
-            <p class="hero-subtitle mb-8 animate-slide-up-delay">Crafting cinematic excellence since 2010</p>
+<h1 class="hero-title mb-4 animate-slide-up 
+    text-4xl sm:text-6xl font-extrabold tracking-wide 
+    bg-gradient-to-r from-red-500 to-red-300 bg-clip-text text-transparent
+    drop-shadow-[0_0_20px_rgba(255,0,0,0.4)]">
+    Welcome to Cinema Studios
+</h1>
+<p class="hero-subtitle mb-8 animate-slide-up-delay 
+   text-lg sm:text-2xl text-gray-300 tracking-wide 
+   drop-shadow-[0_0_10px_rgba(0,0,0,0.6)]">
+   Crafting cinematic excellence since 2010
+</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="movies.html" class="btn-primary">Explore Movies</a>
-                <a href="about.html" class="btn-secondary">Learn More</a>
+                <a href="../pages/movies.html" class="btn-primary">Explore Movies</a>
+                <a href="../pages/about.html" class="btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
@@ -181,7 +204,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-12">
                 <h2 class="text-4xl font-bold">Latest News</h2>
-                <a href="news.html" class="text-red-600 hover:text-red-500 transition">View All <i class="fas fa-arrow-right"></i></a>
+                <a href="../pages/news.html" class="text-red-600 hover:text-red-500 transition">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="latestNews">
                 <!-- News will be loaded here -->
@@ -207,18 +230,18 @@
                     <h4 class="font-bold mb-4 text-lg">Quick Links</h4>
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-                        <li><a href="movies.html" class="hover:text-white transition">Movies</a></li>
-                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
-                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="../pages/movies.html" class="hover:text-white transition">Movies</a></li>
+                        <li><a href="../pages/about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4 text-lg">Explore</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="watchlist.html" class="hover:text-white transition">My Watchlist</a></li>
-                        <li><a href="news.html" class="hover:text-white transition">Latest News</a></li>
-                        <li><a href="careers.html" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="admin.html" class="hover:text-white transition">Admin Panel</a></li>
+                        <li><a href="../pages/watchlist.html" class="hover:text-white transition">My Watchlist</a></li>
+                        <li><a href="../pages/news.html" class="hover:text-white transition">Latest News</a></li>
+                        <li><a href="../pages/careers.html" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="../pages/admin.html" class="hover:text-white transition">Admin Panel</a></li>
                     </ul>
                 </div>
                 <div>
@@ -245,8 +268,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="home.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/home.js"></script>
 </body>
 </html>
 

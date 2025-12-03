@@ -471,7 +471,7 @@ body {
 }
 
 [data-theme="light"] .hero-video-overlay {
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(229, 231, 235, 0.8));
+    background: linear-gradient(120deg, rgba(242, 254, 255, 0.92), rgba(209, 177, 209, -7.2));
 }
 
 .hero-video-content {
@@ -526,7 +526,7 @@ body {
 }
 
 [data-theme="light"] .hero-banner::after {
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8));
+    background: linear-gradient(120deg, rgba(242, 254, 255, 0.92), rgba(209, 177, 209, -7.2));
 }
 
 .hero-banner > .container {

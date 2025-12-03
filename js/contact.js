@@ -173,15 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
-        if (!validateMessage(messageInput.value)) {
-            const err = document.createElement('span');
-            err.id = 'messageError';
-            err.className = 'text-red-500 text-sm mt-1 block';
-            err.textContent = 'Message must be at least 10 characters';
-            messageInput.parentElement.appendChild(err);
-            messageInput.classList.add('border-red-500');
-            isValid = false;
-        }
+
         
         if (!isValid) {
             showToast('Please fix the errors and try again', 'error');
