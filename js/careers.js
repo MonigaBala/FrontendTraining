@@ -210,36 +210,125 @@ function applyForJob(jobId) {
 
     setupUpload(resumeDropZone, resumeInput, resumeLabel, resumeError);
 
-    // Form submit
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Validate all fields
-        const resumeFile = resumeInput.files[0];
-        let valid = true;
-        if (!validateApplicantName(nameInput.value)) { showError(nameInput, nameError, "Enter a valid name (letters only)."); valid=false;}
-        if (!validateEmail(emailInput.value)) { showError(emailInput, emailError, "Enter a valid Gmail address."); valid=false;}
-        if (!validatePhone(phoneInput.value)) { showError(phoneInput, phoneError, "Enter a valid 10-digit number."); valid=false;}
-        if (addressInput.value.trim().length < 5) { showError(addressInput, addressError, "Address must be at least 5 characters."); valid=false;}
-        if (experienceInput.value === "" || experienceInput.value < 0) { showError(experienceInput, experienceError, "Experience cannot be empty or negative."); valid=false;}
-        if (expertiseInput.value.trim().length < 3) { showError(expertiseInput, expertiseError, "Please enter your area of expertise."); valid=false;}
-        if (!validateResume(resumeFile)) { showError(resumeInput, resumeError, "Upload PDF, DOC, or DOCX only under 5MB."); valid=false;}
+   form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Validate fields here (as you already do)...
 
-        if (!valid) return;
+    const resumeFile = resumeInput.files[0];
 
-        // Show success popup near button
-       successPopup.classList.remove("hidden");
-successPopup.style.opacity = "1";
+    // if validation fails return
+    if (!validateResume(resumeFile)) return;
 
-setTimeout(() => {
-    successPopup.style.opacity = "0"; 
+    // Build application object
+    const newApplication = {
+        id: Date.now(),
+        applicantName: nameInput.value,
+        applicantEmail: emailInput.value,
+        jobTitle: job.title,
+        experience: experienceInput.value,
+        expertise: expertiseInput.value,
+        resumeFile: resumeFile ? { name: resumeFile.name, data: URL.createObjectURL(resumeFile) } : null,
+        status: "submitted",
+        adminNote: "",
+        userEmail: emailInput.value
+    };
+
+    // Save globally
+    const apps = JSON.parse(localStorage.getItem("careerApplications") || "[]");
+    apps.push(newApplication);
+    localStorage.setItem("careerApplications", JSON.stringify(apps));
+
+    // Save inside the user account
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    const userIndex = users.findIndex(u => u.email === emailInput.value);
+    if (userIndex > -1) {
+        users[userIndex].applications = users[userIndex].applications || [];
+        users[userIndex].applications.push(newApplication);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Update currentUser if logged in
+        if (localStorage.getItem("currentUser")) {
+            localStorage.setItem("currentUser", JSON.stringify(users[userIndex]));
+        }
+    }
+
+    // Show success popup
+    successPopup.classList.remove("hidden");
     setTimeout(() => {
         successPopup.classList.add("hidden");
         form.reset();
         resumeLabel.classList.add("hidden");
-    }, 500);
-}, 2000);
-    });
+        modal.remove(); // close modal
+    }, 2000);
+});
+
 
     // Close modal on click outside
     modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
 }
+// Save application
+let applications = JSON.parse(localStorage.getItem("applications") || "[]");
+
+const newApplication = {
+    id: Date.now(),
+    name,
+    email,
+    number,
+    position,
+    resume: resume ? resume.name : "",
+    status: "Pending",
+    adminMessage: "",
+    userEmail: currentUser ? currentUser.email : email
+};
+
+applications.push(newApplication);
+localStorage.setItem("applications", JSON.stringify(applications));
+
+// Also save inside user object
+if (currentUser) {
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    users = users.map(u => {
+        if (u.email === currentUser.email) {
+            u.applications = u.applications || [];
+            u.applications.push(newApplication);
+            return u;
+        }
+        return u;
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", JSON.stringify(users.find(u => u.email === currentUser.email)));
+}
+
+// Save application globally for admin
+let apps = JSON.parse(localStorage.getItem("careerApplications") || "[]");
+
+const newApp = {
+    id: Date.now(),
+    applicantName: nameInput.value,
+    applicantEmail: emailInput.value,
+    jobTitle: jobTitle.value,
+    expertise: expertiseInput.value,
+    resumeFile: uploadedResume,
+    coverLetterFile: uploadedCoverLetter,
+    status: "submitted",
+    adminNote: "",
+    userEmail: emailInput.value
+};
+
+// Save to global applications list
+apps.push(newApp);
+localStorage.setItem("careerApplications", JSON.stringify(apps));
+
+// Save inside the user's account also
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let user = users.find(u => u.email === emailInput.value);
+
+if (user) {
+    if (!Array.isArray(user.applications)) user.applications = [];
+    user.applications.push(newApp);
+
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+showToast("Application submitted successfully!");

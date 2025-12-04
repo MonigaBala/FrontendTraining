@@ -742,3 +742,20 @@ const newsData = [
     }
 ];
 
+document.addEventListener("DOMContentLoaded", () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+    const msgBox = document.getElementById("messages");
+
+    if (!currentUser.messages || currentUser.messages.length === 0) {
+        msgBox.innerHTML = "<p>No messages yet.</p>";
+        return;
+    }
+
+    msgBox.innerHTML = currentUser.messages.map(m => `
+        <div class="p-3 border rounded mb-3">
+            <h3 class="font-bold">${m.title}</h3>
+            <p>${m.content}</p>
+            <small>${new Date(m.date).toLocaleString()}</small>
+        </div>
+    `).join("");
+});

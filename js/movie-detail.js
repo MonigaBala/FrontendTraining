@@ -55,7 +55,7 @@ function loadMovieDetail(movieId) {
     if (heroTagline) heroTagline.textContent = `${movie.genre} • ${movie.year}`;
     
     const inWatchlist = isInWatchlist(movie.id);
-    const trailerUrl = movie.trailer || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+    const trailerUrl =  'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     
     container.innerHTML = `
         <div class="flex justify-end mb-6">

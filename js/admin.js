@@ -338,4 +338,100 @@ function computeDashboardStats() {
 function getAdminMovies() {
     return JSON.parse(localStorage.getItem('adminMovies') || '[]');
 }
+function updateApplicationStatus(id, status, note) {
+    let apps = JSON.parse(localStorage.getItem("careerApplications") || "[]");
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+
+    app.status = status;
+    app.adminNote = note;
+
+    // Update global list
+    localStorage.setItem("careerApplications", JSON.stringify(apps));
+
+    // Update user record
+    const user = users.find(u => u.email === app.userEmail);
+    if (user) {
+        if (!Array.isArray(user.messages)) user.messages = [];
+        if (!Array.isArray(user.applications)) user.applications = [];
+
+        // Update user application status
+        const userApp = user.applications.find(a => a.id === id);
+        if (userApp) {
+            userApp.status = status;
+            userApp.adminNote = note;
+        }
+
+        // Add notification message
+        user.messages.push({
+            id: Date.now(),
+            title: "Career Application Update",
+            content: `Your application for ${app.jobTitle} is now: ${status}.  
+            Note: ${note || "No additional notes"}`,
+            date: new Date().toISOString()
+        });
+
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+}
+function loadApplications() {
+    const data = JSON.parse(localStorage.getItem("applications") || "[]");
+    const box = document.getElementById("adminApplications");
+
+    box.innerHTML = data.map(app => `
+        <div class="p-4 border rounded mb-3">
+            <p><b>Name:</b> ${app.name}</p>
+            <p><b>Position:</b> ${app.position}</p>
+            <p><b>Status:</b> ${app.status}</p>
+
+            <textarea id="msg_${app.id}" placeholder="Admin reply…" class="w-full p-2 mt-2"></textarea>
+
+            <button onclick="sendResponse(${app.id})"
+                class="bg-blue-600 text-white px-4 py-1 mt-2">
+                Send Response
+            </button>
+        </div>
+    `).join("");
+}
+
+document.addEventListener("DOMContentLoaded", loadApplications);
+function sendResponse(id) {
+    let applications = JSON.parse(localStorage.getItem("applications") || "[]");
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+    const msgBox = document.getElementById(`msg_${id}`);
+    const message = msgBox.value;
+
+    let app = applications.find(a => a.id === id);
+    if (!app) return;
+
+    app.status = "Responded";
+    app.adminMessage = message;
+
+    // Save to applications
+    localStorage.setItem("applications", JSON.stringify(applications));
+
+    // Push message to user
+    users = users.map(u => {
+        if (u.email === app.userEmail) {
+            u.messages = u.messages || [];
+            u.messages.push({
+                title: "Job Application Update",
+                content: message,
+                date: new Date().toISOString()
+            });
+
+            // update user applications also
+            u.applications = u.applications.map(x => x.id === id ? app : x);
+        }
+        return u;
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Response sent to user!");
+    loadApplications();
+}
 

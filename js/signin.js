@@ -75,22 +75,36 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (user) {
             // Store current user with all their data
-            const userData = {
-                ...user,
-                lastLogin: new Date().toISOString(),
-                watchlist: Array.isArray(user.watchlist) ? user.watchlist : [],
-                notifications: Array.isArray(user.notifications) ? user.notifications : [],
-                applications: Array.isArray(user.applications) ? user.applications : [],
-                messages: Array.isArray(user.messages) ? user.messages : []
-            };
-            const allUsers = JSON.parse(localStorage.getItem('users') || '[]').map(u => u.email === user.email ? userData : u);
-            localStorage.setItem('users', JSON.stringify(allUsers));
-            localStorage.setItem('currentUser', JSON.stringify(userData));
-            localStorage.setItem('isSignedIn', 'true');
+            // Refresh the latest user data (admin updates, messages, application status)
+const usersUpdated = JSON.parse(localStorage.getItem("users") || "[]");
+const latestUser = usersUpdated.find(u => u.email === email);
+
+// Prepare user session data
+const userData = {
+    ...latestUser,
+    lastLogin: new Date().toISOString(),
+    watchlist: Array.isArray(latestUser.watchlist) ? latestUser.watchlist : [],
+    notifications: Array.isArray(latestUser.notifications) ? latestUser.notifications : [],
+    applications: Array.isArray(latestUser.applications) ? latestUser.applications : [],
+    messages: Array.isArray(latestUser.messages) ? latestUser.messages : []
+};
+
+// Store updated user
+localStorage.setItem("currentUser", JSON.stringify(userData));
+localStorage.setItem("isSignedIn", "true");
+
+// Trigger login events
+window.dispatchEvent(new CustomEvent("authChanged"));
+showToast("Sign in successful!");
+
+setTimeout(() => {
+    window.location.href = "/index.html";
+}, 1000);
+
             window.dispatchEvent(new CustomEvent('authChanged'));
             showToast('Sign in successful!');
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = '/index.html';
             }, 1000);
         } else {
             showToast('Invalid email or password', 'error');
